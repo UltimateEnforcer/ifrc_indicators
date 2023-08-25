@@ -1,0 +1,70 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+table {
+    background-color: #fff;
+}
+
+th {
+    font-weight: bold;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control, .btn {
+    border-radius: 3px;
+}
+
+/* Hover effect for table rows */
+table tbody tr:hover {
+    background-color: #f6f6f6;
+}
+
+/* Space between rows for better readability */
+table tbody tr {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.definition-col {
+    width: 40%; /* adjust as needed */
+}
+
+.action-col {
+    width: 15%; /* adjust as needed */
+}
+
+.id-col {
+    width: 8%;  /* Adjust this value according to your needs */
+}
+
+#indicatorTable thead input[type="text"] {
+    width: 100%;   /* Full width */
+    box-sizing: border-box; /* This makes sure padding and border don't increase the size */
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    margin: 0; /* Reset default margin */
+    border-radius: 4px;
+}

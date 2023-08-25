@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Add New Indicator</h2>
+    <form action="{{ url_for('add_indicator') }}" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Definition</label>
+            <textarea class="form-control" name="definition" required></textarea>
+        </div>
+
+        <div class="row">
+            <!-- SPs Group -->
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">SPs</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPA" id="SPA">
+                            <label class="form-check-label" for="SPA">SPA</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPB" id="SPB">
+                            <label class="form-check-label" for="SPB">SPB</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPC" id="SPC">
+                            <label class="form-check-label" for="SPC">SPC</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPD" id="SPD">
+                            <label class="form-check-label" for="SPD">SPD</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPE" id="SPE">
+                            <label class="form-check-label" for="SPE">SPE</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EFs Group -->
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">EFs</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFA" id="EFA">
+                            <label class="form-check-label" for="EFA">EFA</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFB" id="EFB">
+                            <label class="form-check-label" for="EFB">EFB</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFC" id="EFC">
+                            <label class="form-check-label" for="EFC">EFC</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFD" id="EFD">
+                            <label class="form-check-label" for="EFD">EFD</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex mt-3">
+            <button type="submit" class="btn btn-primary mr-2">Add</button>
+            <a href="/" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

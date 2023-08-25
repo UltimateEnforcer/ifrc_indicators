@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Edit Indicator</h2>
+    <form action="{{ url_for('edit', id=indicator.ID) }}" method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" value="{{ indicator.name }}">
+        </div>
+        <div class="form-group">
+            <label>Definition</label>
+            <textarea class="form-control" name="definition">{{ indicator.definition }}</textarea>
+        </div>
+        
+        <div class="row">
+            <!-- SPs Group -->
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">SPs</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPA" id="SPA" {{ 'checked' if indicator.SPA else '' }}>
+                            <label class="form-check-label" for="SPA">SPA</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPB" id="SPB" {{ 'checked' if indicator.SPB else '' }}>
+                            <label class="form-check-label" for="SPB">SPB</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPC" id="SPC" {{ 'checked' if indicator.SPC else '' }}>
+                            <label class="form-check-label" for="SPC">SPC</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPD" id="SPD" {{ 'checked' if indicator.SPD else '' }}>
+                            <label class="form-check-label" for="SPD">SPD</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPE" id="SPE" {{ 'checked' if indicator.SPE else '' }}>
+                            <label class="form-check-label" for="SPE">SPE</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="SPF" id="SPF" {{ 'checked' if indicator.SPF else '' }}>
+                            <label class="form-check-label" for="SPF">SPF</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EFs Group -->
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">EFs</div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFA" id="EFA" {{ 'checked' if indicator.EFA else '' }}>
+                            <label class="form-check-label" for="EFA">EFA</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFB" id="EFB" {{ 'checked' if indicator.EFB else '' }}>
+                            <label class="form-check-label" for="EFB">EFB</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFC" id="EFC" {{ 'checked' if indicator.EFC else '' }}>
+                            <label class="form-check-label" for="EFC">EFC</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="EFD" id="EFD" {{ 'checked' if indicator.EFD else '' }}>
+                            <label class="form-check-label" for="EFD">EFD</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex mt-3">
+            <button type="submit" class="btn btn-success mr-2">Save</button>
+            <a href="{{ url_for('home') }}" class="btn btn-warning">Go Back</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

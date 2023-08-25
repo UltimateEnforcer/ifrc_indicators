@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>View Indicator</h2>
+    <p><strong>ID:</strong> {{ indicator.ID }}</p>
+    <p><strong>Name:</strong> {{ indicator.name }}</p>
+    <p><strong>Definition:</strong> {{ indicator.definition }}</p>
+
+    <div class="row">
+        <!-- SPs Group -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">SPs</div>
+                <div class="card-body">
+                    {% if indicator.SPA %} <p>SPA</p> {% endif %}
+                    {% if indicator.SPB %} <p>SPB</p> {% endif %}
+                    {% if indicator.SPC %} <p>SPC</p> {% endif %}
+                    {% if indicator.SPD %} <p>SPD</p> {% endif %}
+                    {% if indicator.SPE %} <p>SPE</p> {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- EFs Group -->
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header">EFs</div>
+                <div class="card-body">
+                    {% if indicator.EFA %} <p>EFA</p> {% endif %}
+                    {% if indicator.EFB %} <p>EFB</p> {% endif %}
+                    {% if indicator.EFC %} <p>EFC</p> {% endif %}
+                    {% if indicator.EFD %} <p>EFD</p> {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('home') }}" class="btn btn-warning mt-3">Go Back</a>
+</div>
+</body>
+</html>

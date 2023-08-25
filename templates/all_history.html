@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}"> <!-- Link to the new CSS file -->
+    <title>All Indicators History</title>
+    <script>
+        function searchTable() {
+            let table, tr, i;
+            let visibleColumns = Array(10).fill(false);
+            let inputFilters = Array(10);
+
+            for (let j = 0; j < 10; j++) {
+                inputFilters[j] = document.getElementById("searchInput" + j);
+            }
+
+            table = document.getElementById("historyTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                visibleColumns.fill(false);
+
+                for (let j = 0; j < 10; j++) {
+                    let td = tr[i].getElementsByTagName("td")[j];
+
+                    if (td) {
+                        let filterValue = inputFilters[j].value.toUpperCase();
+                        visibleColumns[j] = td.innerHTML.toUpperCase().indexOf(filterValue) > -1 || filterValue === "";
+                    }
+                }
+
+                if (visibleColumns.every(value => value)) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid mt-5">
+        <h2>All History of Changes</h2>
+        <table class="table table-bordered table-striped" id="historyTable">
+            <thead>
+                <tr>
+                    <td colspan="10">
+                        <div class="row">
+                            <div class="col"><input type="text" id="searchInput0" onkeyup="searchTable()" placeholder="Search ID" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput1" onkeyup="searchTable()" placeholder="Search Date" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput2" onkeyup="searchTable()" placeholder="Search Old Name" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput3" onkeyup="searchTable()" placeholder="Search New Name" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput4" onkeyup="searchTable()" placeholder="Search Old Definition" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput5" onkeyup="searchTable()" placeholder="Search New Definition" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput6" onkeyup="searchTable()" placeholder="Search Old SPs" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput7" onkeyup="searchTable()" placeholder="Search New SPs" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput8" onkeyup="searchTable()" placeholder="Search Old EFs" class="form-control"></div>
+                            <div class="col"><input type="text" id="searchInput9" onkeyup="searchTable()" placeholder="Search New EFs" class="form-control"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Indicator ID</th>
+                    <th>Changed At</th>
+                    <th>Old Name</th>
+                    <th>New Name</th>
+                    <th>Old Definition</th>
+                    <th>New Definition</th>
+                    <th>Old SPs</th>
+                    <th>New SPs</th>
+                    <th>Old EFs</th>
+                    <th>New EFs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in histories %}
+                <tr>
+                    <td>{{ record.indicator_ID }}</td>
+                    <td>{{ record.changed_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ record.old_name }}</td>
+                    <td>{{ record.new_name }}</td>
+                    <td>{{ record.old_definition }}</td>
+                    <td>{{ record.new_definition }}</td>
+                    <td>
+                        {% if record.old_SPA %}SPA {% endif %}
+                        {% if record.old_SPB %}SPB {% endif %}
+                        {% if record.old_SPC %}SPC {% endif %}
+                        {% if record.old_SPD %}SPD {% endif %}
+                        {% if record.old_SPE %}SPE {% endif %}
+                        {% if record.old_SPF %}SPF {% endif %}
+                    </td>
+                    <td>
+                        {% if record.new_SPA %}SPA {% endif %}
+                        {% if record.new_SPB %}SPB {% endif %}
+                        {% if record.new_SPC %}SPC {% endif %}
+                        {% if record.new_SPD %}SPD {% endif %}
+                        {% if record.new_SPE %}SPE {% endif %}
+                        {% if record.new_SPF %}SPF {% endif %}
+                    </td>
+                    <td>
+                        {% if record.old_EFA %}EFA {% endif %}
+                        {% if record.old_EFB %}EFB {% endif %}
+                        {% if record.old_EFC %}EFC {% endif %}
+                        {% if record.old_EFD %}EFD {% endif %}
+                        {% if record.old_EFE %}EFE {% endif %}
+                        {% if record.old_EFF %}EFF {% endif %}
+                    </td>
+                    <td>
+                        {% if record.new_EFA %}EFA {% endif %}
+                        {% if record.new_EFB %}EFB {% endif %}
+                        {% if record.new_EFC %}EFC {% endif %}
+                        {% if record.new_EFD %}EFD {% endif %}
+                        {% if record.new_EFE %}EFE {% endif %}
+                        {% if record.new_EFF %}EFF {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('home') }}" class="btn btn-warning">Go Back</a>
+    </div>
+</body>
+
+</html>

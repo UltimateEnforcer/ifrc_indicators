@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Indicators Management Tool</title>
+    <script>
+        function triggerFileSelect() {
+            document.getElementById('fileInput').click();
+        }
+
+        function onFileSelected() {
+            document.getElementById('uploadForm').submit();
+        }
+
+        function searchTable() {
+			let table, tr, tdID, tdName, tdDefinition, i;
+			let visibleID, visibleName, visibleDefinition;
+
+			let inputID = document.getElementById("searchInput0");
+			let filterID = inputID.value.toUpperCase();
+			let inputName = document.getElementById("searchInput1");
+			let filterName = inputName.value.toUpperCase();
+			let inputDefinition = document.getElementById("searchInput2");
+			let filterDefinition = inputDefinition.value.toUpperCase();
+			
+			table = document.getElementById("indicatorTable");
+			tr = table.getElementsByTagName("tr");
+
+			for (i = 2; i < tr.length; i++) {  // Start from 2 to skip header and search input rows
+				tdID = tr[i].getElementsByTagName("td")[0]; // ID column
+				tdName = tr[i].getElementsByTagName("td")[1];  // Name column
+				tdDefinition = tr[i].getElementsByTagName("td")[2];  // Definition column
+				
+				visibleID = tdID.innerHTML.toUpperCase().indexOf(filterID) > -1;
+				visibleName = tdName.innerHTML.toUpperCase().indexOf(filterName) > -1;
+				visibleDefinition = tdDefinition.innerHTML.toUpperCase().indexOf(filterDefinition) > -1;
+
+				if (visibleID && visibleName && visibleDefinition) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid mt-5"> 
+
+        <form id="uploadForm" action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data"
+            style="display: none;">
+            <input type="file" id="fileInput" name="file" onchange="onFileSelected()">
+        </form>
+
+        <div class="mb-3">
+            <button onclick="triggerFileSelect()" class="btn btn-secondary d-inline-block">Import CSV</button>
+            <a href="{{ url_for('add_page') }}" class="btn btn-primary d-inline-block ml-2">Add New Indicator</a>
+            <a href="{{ url_for('all_history') }}" class="btn btn-success d-inline-block ml-2">View All History</a>
+        </div>
+
+        <h2 class="mt-5">Indicators Management Tool</h2>
+        <table class="table" id="indicatorTable">
+			<thead>
+				<tr>
+					<th class="id-col"><input type="text" id="searchInput0" onkeyup="searchTable()" placeholder="Search ID" style="width: 100%;"></th>
+					<th><input type="text" id="searchInput1" onkeyup="searchTable()" placeholder="Search Name"></th>
+					<th class="definition-col"><input type="text" id="searchInput2" onkeyup="searchTable()" placeholder="Search Definition"></th> <!-- Add class here -->
+				</tr>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th class="definition-col">Definition</th>
+					<th class="action-col">Actions</th>
+				</tr>
+			</thead>
+            <tbody>
+                {% for indicator in indicators %}
+                <tr>
+                    <td>{{ indicator.ID }}</td>
+                    <td>{{ indicator.name }}</td>
+                    <td>{{ indicator.definition }}</td>
+                    <td>
+                        <a href="{{ url_for('view', id=indicator.ID) }}" class="btn btn-secondary">View</a>
+						<a href="{{ url_for('edit', id=indicator.ID) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ url_for('history', id=indicator.ID) }}" class="btn btn-info">History</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
